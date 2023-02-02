@@ -1,0 +1,35 @@
+--Create a grocery store database
+
+
+CREATE TABLE dog_store(id INTEGER PRIMARY KEY, name TEXT, description TEXT, quantity INTEGER, section TEXT, price INTEGER);
+
+INSERT INTO dog_store VALUES (1, "tennis balls", "pack of three tennis balls", 15, "dog toys", 10.99), 
+(2, "rope toy", "purple and white braided", 10, "dog toys", 8.75),
+(3, "Slicker Brush", "Pink MED Size", 9, "dog grooming", 34.99),
+(4, "Chewy Treats", "Chicken Flavored", 25 , "dog treats and chews", 10.99),
+(5, "Split Antler", "Small Split Antler", 8, "dog treats and chews", 7.99),
+(6, "nail clipper", "Guillotine Style Large Dog", 30, "dog grooming", 5.99),
+(7, "Lamb Freeze Dried Food", "64 oz Freeze Dried", 10, "dog food", 54.99),
+(8, "Donut Bed", "Small Blue Donut Bed", 5, "dog accessories", 35.84),
+(9, "Skiijoring Bungee Leash", "6 Ft Purple", 10, "dog accessories", 20.89),
+(10, "Agility Martingale Collar", "Small Leash Collar Combo", 5, "dog accessories", 23.99),
+(11, "Lamb Lung Treats", "8 oz Lamb Lung Freeze Dried", 15, "dog treats", 10.99),
+(12, "Rubber Bone", "Large Dog Rubber Bone", 9, "dog toys", 11.99),
+(13, "Beef Cheek Roll", "Large Dog Beef Cheek Roll", 12, "dog treats and chews", 8.99),
+(14, "Frozen Duck Patties", "12 8 ounce patties", 15, "dog food", 64.99),
+(15, "Toothbrushes", "pack of three toothbrushes", 12, "dog grooming", 10.99),
+(16, "Chicken Kibble", "30 lb bag of food", 8, "dog food", 74.89);
+
+--Display the database ordered by price. 
+SELECT * FROM dog_store 
+ORDER BY price desc;  
+
+--How many total items are in stock?
+SELECT SUM(quantity) "Total items in Inventory" 
+FROM dog_store;
+
+
+--What is the average price of items in the dog food section? 
+SELECT AVG(price) "average dog food price"
+FROM dog_store
+where section='dog food'; 
