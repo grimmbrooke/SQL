@@ -1,0 +1,113 @@
+--Create tables about famous people and what they do here --
+
+
+CREATE TABLE stars (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    age INTEGER);
+    
+INSERT INTO stars (fullname, age) VALUES ("Taylor Swift", "33");
+INSERT INTO stars (fullname, age) VALUES ("Kim Kardashian", "42");
+INSERT INTO stars (fullname, age) VALUES ("Kanye West", "44");
+INSERT INTO stars (fullname, age) VALUES ("Chris Evans", "41");
+INSERT INTO stars (fullname, age) VALUES ("Billie Eilish", "21");
+INSERT INTO stars (fullname, age) VALUES ("Nicolas Cage", "59");
+INSERT INTO stars (fullname, age) VALUES ("Zac Efron", "35");
+INSERT INTO stars (fullname, age) VALUES ("Honey Boo Boo", "17");
+INSERT INTO stars (fullname, age) VALUES ("Simon Cowell", "63");
+
+CREATE TABLE profession (id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+industry TEXT, 
+stars_id INTEGER);
+
+INSERT INTO profession (name, industry, stars_id) VALUES ("Musician", "Music", 1);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Reality Star", "Television", 2);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Musician", "Music", 3);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Actor", "Film", 4);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Musician", "Music", 5);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Actor", "Film", 6);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Actor", "Film", 7);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Reality Star", "Television", 8);
+INSERT INTO profession (name, industry, stars_id) VALUES ("Reality Star", "Television", 9);
+
+CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+stars_id INTEGER);
+
+INSERT INTO movies (name, stars_id) VALUES ("Captain America", 4);
+INSERT INTO movies (name, stars_id) VALUES ("Knives Out", 4);
+INSERT INTO movies (name, stars_id) VALUES ("The Avengers", 4);
+INSERT INTO movies (name, stars_id) VALUES ("National Treasure", 6);
+INSERT INTO movies (name, stars_id) VALUES ("Ghost Rider", 6);
+INSERT INTO movies (name, stars_id) VALUES ("High School Musical", 7);
+INSERT INTO movies (name, stars_id) VALUES ("Neighbors", 7);
+INSERT INTO movies (name, stars_id) VALUES ("17 Again", 7);
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+stars_id INTEGER);
+INSERT INTO songs (name, stars_id) VALUES ("You Belong With Me", 1);
+INSERT INTO songs (name, stars_id) VALUES ("Love Story", 1);
+INSERT INTO songs (name, stars_id) VALUES ("Heartless", 3);
+INSERT INTO songs (name, stars_id) VALUES ("Flashing Lights", 3);
+INSERT INTO songs (name, stars_id) VALUES ("Bad Guy", 5);
+
+CREATE TABLE shows (id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+stars_id INTEGER);
+INSERT INTO shows (name, stars_id) VALUES ("Keeping Up with The Kardashians", 2);
+INSERT INTO shows (name, stars_id) VALUES ("The Kardashians", 2);
+INSERT INTO shows (name, stars_id) VALUES ("Toddlers and Tiaras", 8);
+INSERT INTO shows (name, stars_id) VALUES ("Here Comes Honey Boo Boo", 8);
+INSERT INTO shows (name, stars_id) VALUES ("American Idol", 9);
+INSERT INTO shows (name, stars_id) VALUES ("America's Got Talents", 9);
+
+
+--Show the movies and which celebrity has starred in them.--
+
+SELECT m.name, st.fullname
+FROM movies m
+JOIN stars st
+ON m.stars_id = st.id;
+
+
+--Which songs from the songs table did Taylor Swift sing?--
+
+SELECT st.fullname, s.name
+FROM songs s
+JOIN stars st
+ON st.id = s.stars_id
+WHERE st.fullname = "Taylor Swift";
+
+
+--Which celebrities are in the television industry?--
+
+SELECT st.fullname, p.industry
+FROM stars st
+JOIN profession p
+ON st.id = p.stars_id
+WHERE p.industry = "Television";
+
+
+--Which celebrities are over the age of 40? Order the list from oldest to youngest--
+
+SELECT fullname, age
+FROM stars
+WHERE age > 40
+ORDER BY age desc;
+
+--Make a table where all celebrities are listed next to their profession and any works they have been involved in. Order by their profession--
+
+SELECT st.fullname, p.name as profession, m.name as movie_title, s.name as song_title, sh.name as tvshow_title
+FROM stars st
+JOIN profession p
+ON st.id = p.stars_id
+LEFT OUTER JOIN movies m
+ON st.id = m.stars_id
+LEFT OUTER JOIN songs s
+ON st.id = s.stars_id
+LEFT OUTER JOIN shows sh
+ON st.id = sh.stars_id
+ORDER BY p.name;
+
