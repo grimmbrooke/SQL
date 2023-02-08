@@ -1,4 +1,4 @@
---Create tables about famous people and what they do here --
+--Create tables about famous people and what they do here
 
 
 CREATE TABLE stars (
@@ -64,7 +64,7 @@ INSERT INTO shows (name, stars_id) VALUES ("American Idol", 9);
 INSERT INTO shows (name, stars_id) VALUES ("America's Got Talents", 9);
 
 
---Show the movies and which celebrity has starred in them.--
+--Show the movies and which celebrity has starred in them.
 
 SELECT m.name, st.fullname
 FROM movies m
@@ -72,7 +72,7 @@ JOIN stars st
 ON m.stars_id = st.id;
 
 
---Which songs from the songs table did Taylor Swift sing?--
+--Which songs from the songs table did Taylor Swift sing?
 
 SELECT st.fullname, s.name
 FROM songs s
@@ -81,7 +81,7 @@ ON st.id = s.stars_id
 WHERE st.fullname = "Taylor Swift";
 
 
---Which celebrities are in the television industry?--
+--Which celebrities are in the television industry?
 
 SELECT st.fullname, p.industry
 FROM stars st
@@ -90,14 +90,14 @@ ON st.id = p.stars_id
 WHERE p.industry = "Television";
 
 
---Which celebrities are over the age of 40? Order the list from oldest to youngest--
+--Which celebrities are over the age of 40? Order the list from oldest to youngest
 
 SELECT fullname, age
 FROM stars
 WHERE age > 40
 ORDER BY age desc;
 
---Make a table where all celebrities are listed next to their profession and any works they have been involved in. Order by their profession--
+--Make a table where all celebrities are listed next to their profession and any works they have been involved in. Order by their profession
 
 SELECT st.fullname, p.name as profession, m.name as movie_title, s.name as song_title, sh.name as tvshow_title
 FROM stars st
