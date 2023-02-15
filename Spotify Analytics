@@ -38,3 +38,16 @@ WHERE artist_name= 'Olivia Rodrigo';
 SELECT artist_name, AVG(danceability), AVG(popularity), AVG(energy)
 FROM BIT_DB.Spotifydata
 WHERE artist_name = 'Ariana Grande';
+
+--Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 90 or above, show their name, their average popularity, and label them as a “Top Star”.
+WITH avgpop_CTE AS (
+SELECT s.artist_name,
+AVG(s.popularity) AS average_popularity
+FROM SpotifyData s 
+GROUP BY s.artist_name)
+ 
+SELECT  artist_name,
+        average_popularity,
+        'Top Star' AS tag
+FROM avgpop_CTE
+WHERE average_popularity>=90;
