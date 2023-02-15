@@ -33,3 +33,8 @@ LIMIT 10;
 SELECT track_name
 FROM BIT_DB.Spotifydata
 WHERE artist_name= 'Olivia Rodrigo';
+
+--What are the average danceability, average popularity and average energy of Ariana Grande's songs?
+SELECT artist_name, AVG(danceability), AVG(popularity), AVG(energy)
+FROM BIT_DB.Spotifydata
+WHERE artist_name = 'Ariana Grande';
