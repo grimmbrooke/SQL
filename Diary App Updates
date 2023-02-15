@@ -1,0 +1,29 @@
+# Prompt - Think of an imaginary app that stores data in a SQL database and write SQL statements that would be in that database.
+# My imaginary app is a diary app that stores your username, the date, and the diary entry.
+
+--CREATE a table to store the data.
+CREATE TABLE diary (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+username TEXT,
+date TEXT,
+content TEXT);
+
+
+--INSERT a few example rows in the table.
+INSERT INTO diary (username, date, content)
+VALUES ("bgrimm", "1-10-2022", "Today was exhausting so I took a two hour nap");
+
+INSERT INTO diary (username, date, content)
+VALUES ("bgrimm", "1-12-2022", "I had off of work today, so I got a lot of chores done");
+
+INSERT INTO diary (username, date, content)
+VALUES ("bgrimm", "1-13-2022", "Today was a long day at work, I ended up having to stay past 6 pm");
+
+
+--Use an UPDATE to emulate what happens when you edit data in the app.
+UPDATE diary SET content = "Today was exhausting, so I took two naps"
+WHERE id = 1;
+
+
+--Use a DELETE to emulate what happens when you delete data in the app.
+DELETE FROM diary WHERE id = 3;
